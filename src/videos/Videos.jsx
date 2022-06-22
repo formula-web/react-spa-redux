@@ -4,6 +4,7 @@ import { loadVideos } from "../store/videos";
 
 
 let Videos=(props)=>{
+    console.log("<<<<<<VIDEOS.JSX  inicio >>>>>>");
     //const [ stateVideos,setstateVideos  ] = useState( useSelector(state=>state.sliceVideos) );
     let stateVideos = useSelector(state=>state.sliceVideos);//recoge estado videos
     let dispatcher  = useDispatch(); //dispatcher para invocar reducers/actions 
@@ -13,6 +14,7 @@ let Videos=(props)=>{
     // y llamar al reducer loadVideos del state videos
     useEffect( 
         ()=>{ 
+            console.log("videos.jsx - carga inicial - llama a loadvideos()")
             if ( true ) {
                 //console.log("<Videos> useEffect al Montarse el componente. ¿Se ejecuta dos veces?");
                 dispatcher( loadVideos() );   
@@ -28,7 +30,7 @@ let Videos=(props)=>{
                 { stateVideos.data.videos.map(video=>(<div>{video.id} - {video.title}</div>)) }
             </div>
           <h2>.........................................................</h2>
-
+          {     console.log("<<<<<<VIDEOS.JSX  fin >>>>>>") }
      </>
     )
 }

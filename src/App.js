@@ -17,7 +17,7 @@ import Footer from './tareas/Footer';
 import TodoList from './tareas/TodoList';
 
 let Home = () => {
-  console.log("Home(). Estado tareas:",store.getState().sliceTareas.tareas);
+  console.log("<<<<<<HOME>>>>>>. Estado tareas:",store.getState().sliceTareas.tareas);
   let dispatcher = useDispatch();
   let onclick =()=>{
     console.log("Store:",store, "state:", store.getState(), "todos=",store.getState().sliceTareas.tareas); 
@@ -37,8 +37,8 @@ let Home = () => {
       </div>
       <div id='div2'>
         <h2>APLICACION DE TAREAS</h2>
-        <AddTodo dispatch={ dispatcher}  />
-        <VisibleTodoList todos={store.getState().sliceTareas.tareas} />
+        <AddTodo  />
+        <VisibleTodoList  />
 
         <Footer />
       </div>

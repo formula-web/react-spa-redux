@@ -33,6 +33,6 @@ let AddTodo = ( {dispatch} ) => {
     </div>
   )
 }
-AddTodo = connect()(AddTodo)
+//AddTodo = connect()(AddTodo)
 
 export default AddTodo

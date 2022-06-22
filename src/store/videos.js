@@ -28,7 +28,7 @@ export const loadVideos = createAsyncThunk ('videos/loadVideos', async (  pagina
     }
     if (!tokenjwt) return Promise.reject("Token vacio");
     
-    console.log('...tokenjwt:',tokenjwt );
+    //console.log('...tokenjwt:',tokenjwt );
 
     // descarga video en asincrono llamando al servicio web 
     let respuesta=await Axios.get(`${config.servicioVideoapi}/videos?page=${pagina}`, 

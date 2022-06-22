@@ -120,7 +120,7 @@ let userSlice = createSlice({
 
 // Definir y exportar Actions (objeto slice.actions) con los atributos que coincidan en nombre con los reducers
 export const { logOut  } = userSlice.actions;
-console.log("usuario.js userSlice:", userSlice);
+//console.log("usuario.js userSlice:", userSlice);
 
 // Exportar el Slice (no se por qué se exporta userSlice.reducer en lugar de userSlice)
 export default userSlice.reducer;

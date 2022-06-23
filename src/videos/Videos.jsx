@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadVideos } from "../store/videos";
+import Videoplayer from "./Videoplayer";
 
 
 let Videos=( {videos} )=>{
@@ -29,7 +30,10 @@ let Videos=( {videos} )=>{
         <h2> Inicio Componente VIDEOS...</h2>
             <h3>Status: {stateVideos.status}   </h3>
             <div>
-                { stateVideos.data.videos.map(video=>(<div key={video.id}>{video.id} - {video.title}</div>)) }
+                { stateVideos.data.videos.map(video=>(<div>
+                <div key={video.id}>{video.id} - {video.title} </div>
+                <Videoplayer video={video} /></div>
+                )) }
             </div>
           <h2>.........................................................</h2>
           {     console.log("<<<<<<VIDEOS.JSX  fin >>>>>>") }

@@ -15,6 +15,7 @@ import AddTodo from './tareas/containers/AddTodo';
 import VisibleTodoList from './tareas/containers/VisibleTodoList';
 import Footer from './tareas/Footer';
 import TodoList from './tareas/TodoList';
+import VideosContainer from './videos/containers/VideosContainer';
 
 let Home = () => {
   console.log("<<<<<<HOME>>>>>>. Estado tareas:",store.getState().sliceTareas.tareas);
@@ -81,7 +82,7 @@ let ComunVideos = () => {
   return (
     <>
       <h2>Elemento cabecera maste2 4.3 tris comun de /videos</h2>
-      <Videos />
+      <Videos  />
 
       <button onClick={iraHome}>Home</button>
       <button onClick={borrarVideos}>Borrar Videos</button>

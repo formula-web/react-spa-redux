@@ -46,11 +46,12 @@ let addtodofunc= (state={ status:'default', tareas:[], nextid:1 }, action)=>{
   return newstate;
 }
 
-
+/*
 const todoApp = combineReducers({
   visibilityFilter,
   todos
 })
+*/
 
 let estadoInicial = { estado:'Inicial', nextid:2, tareas:[{id:1,text:'Tarea1',completed:false}], visibilityFilter: 'SHOW_ALL' };
 

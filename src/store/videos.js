@@ -17,7 +17,7 @@ import Axios from 'axios'; //axios==libreria js llamadas ajax (similar a fetch)
 // createAsyncThunk retorna una promise que deja el resultado en action.payload
 // *** LOADVIDEOS ****
 export const loadVideos = createAsyncThunk ('videos/loadVideos', async (  pagina = 1, thunkAPI )=>{
-    console.log("loadVideos()... thunkAPI:",thunkAPI.getState() );
+    console.log("Entrando en reducer loadVideos()... thunkAPI:",thunkAPI.getState() );
     //thunkAPI permite acceder al store/state global de Redux. Cogemos el token jwt qie está en la propiedad user del state de sliceUsuario:
     let tokenjwt=null;
     try {
@@ -48,7 +48,7 @@ export const loadVideos = createAsyncThunk ('videos/loadVideos', async (  pagina
 // createAsyncThunk retorna una promise que deja el resultado en action.payload
 // *** CREARVIDEO ****
 export const crearVideo = createAsyncThunk ('videos/crearVideo', async ( formData, thunkAPI )=>{
-    console.log("reducer crearVideo()...");
+    console.log("Entrando en reducer crearVideo()...");
     //thunkAPI permite acceder al store/state global de Redux. 
     //Comprobar que existe el token jwt en la propiedad user del state de sliceUsuario:
     let tokenjwt=null;
@@ -78,7 +78,7 @@ export const crearVideo = createAsyncThunk ('videos/crearVideo', async ( formDat
 
 //REDUCER:  clearVideos
 let clearVideosReducer=(state,action)=>{
-    console.log("clearVideosReducer, state=",state.sliceUsuario);
+    console.log("Entrando en reducer clearVideos, action=",action);
     let newstate = state;
     newstate.status= 'Videos borrados';
     newstate.data.videos=[];
@@ -89,7 +89,7 @@ let clearVideosReducer=(state,action)=>{
 
 //REDUCER:  cambiaEstado
 let cambiaEstadoReducer=(state,action)=>{
-    console.log("clearVideosReducer, state=",state.sliceUsuario);
+    console.log("Entrando en reducer vidoes.cambiaEstado, action=", action);
     let newstate = state;
     newstate.status= action.estado;
     newstate.data.videos=Array.from(state.data.videos);
@@ -144,13 +144,14 @@ let videoSlice = createSlice({
         },
         [crearVideo.fulfilled]: (state, action)=>{
                 state.status="Creado video OK";
-                state.data = {
-                    currenPage:1,
-                    nextPage:1,
-                    prevPage:0,
-                    total:0,
-                    videos: state.data.videos.concat(action.payload.videos)
-                }
+                state.data.total = state.data.total+1;
+                //state.data = {
+                   // currenPage:1,
+                  //  nextPage:1,
+                  //  prevPage:0,
+                  //  total:0,
+                  //  videos: state.data.videos.concat(action.payload.videos)
+                //}
         },
         [crearVideo.rejected]: (state, action)=>{
             state.status="Error creando video";

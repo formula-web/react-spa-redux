@@ -1,4 +1,4 @@
-import { PlayerSdk } from "@api.video/player-sdk";
+import { PlayerSdk } from "@api.video/player-sdk";  // VIDEOPLAYER:  https://docs.api.video/docs
 import React from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
@@ -10,9 +10,9 @@ let Videoplayer = ({video})=>{
     useEffect(()=>{
         if (!player.current) {
             player.current = new PlayerSdk(`#appPlayer-${video.id}`,{muted:true});
-            //player.current.mute();    
+            player.current.mute();    
             player.current.play();
-            console.log("....nuevo sdk player.current=", player.current)
+            console.log("....nuevo sdk player.current para video.id=",video.id, player.current)
         }
     },[video.id])    //Se ejecuta cada vez que cambie video.id
     return (

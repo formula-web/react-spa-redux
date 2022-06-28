@@ -16,6 +16,7 @@ import VisibleTodoList from './tareas/containers/VisibleTodoList';
 import Footer from './tareas/Footer';
 import TodoList from './tareas/TodoList';
 import VideosContainer from './videos/containers/VideosContainer';
+import VideoShow from './videos/VideoShow';
 
 let Home = () => {
   console.log("<<<<<<HOME>>>>>>. Estado tareas:",store.getState().sliceTareas.tareas);
@@ -151,10 +152,10 @@ function App() {
                 <Route path=':id' element={<NoImplementado />} />
                 <Route path=':id/videos' element={<NoImplementado />} />
               </Route>
-              <Route path='/videos' element={<ComunVideos />} >
-                <Route path='' element={<NoImplementado />} />
+              <Route path='/videos'  >
+                <Route path='' element={<ComunVideos />} />
                 <Route path='nuevo' element={<VideosNuevo />} />
-                <Route path=':id' element={<Videosid />}></Route>
+                <Route path=':id' element={<VideoShow  />}></Route>
               </Route>
               <Route path='*' element={<Error404 />} />
           </Routes>

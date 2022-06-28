@@ -12,10 +12,10 @@ import Axios from 'axios'; //axios==libreria js llamadas ajax (similar a fetch)
 
 //console.log( "Config.servicioVideoapi:", `${config.servicioVideoapi}/videos` );
 
+// *** REDUCER ASINCRONO  videos/loadVideos ****
 // Definir y exportar Reducer
 // Definir y exportar Reducer/action 'loadVideos' que se resuelve en modo asíncrono. 
 // createAsyncThunk retorna una promise que deja el resultado en action.payload
-// *** LOADVIDEOS ****
 export const loadVideos = createAsyncThunk ('videos/loadVideos', async (  pagina = 1, thunkAPI )=>{
     console.log("Entrando en reducer loadVideos()... thunkAPI:",thunkAPI.getState() );
     //thunkAPI permite acceder al store/state global de Redux. Cogemos el token jwt qie está en la propiedad user del state de sliceUsuario:
@@ -44,9 +44,47 @@ export const loadVideos = createAsyncThunk ('videos/loadVideos', async (  pagina
     console.log("Respuesta servicio web"+`Config.servicioVideoapi/videos?page=${pagina}`, respuesta.data);
     return respuesta.data;
 });
+
+
+// *** REDUCER ASINCRONO  videos/getVideo ****
+// Definir y exportar Reducer
+// Definir y exportar Reducer/action 'getVideo' que se resuelve en modo asíncrono. 
+// createAsyncThunk retorna una promise que deja el resultado en action.payload
+export const getVideo = createAsyncThunk ('videos/getVideo', async (  videoId, thunkAPI )=>{
+    console.log("Entrando en reducer getVideo()... thunkAPI:",thunkAPI.getState() );
+    //thunkAPI permite acceder al store/state global de Redux. Cogemos el token jwt qie está en la propiedad user del state de sliceUsuario:
+    let tokenjwt=null;
+    try {
+        tokenjwt = thunkAPI.getState().sliceUsuario.user.jwtToken;
+    }catch {
+        console.log('getVideo(): no hay token jwt');
+        return Promise.reject("No hay token jwt. Usuario no logado ?");
+    }
+    if (!tokenjwt) return Promise.reject("Token vacio");
+    
+    //console.log('...tokenjwt:',tokenjwt );
+
+    // descarga video en asincrono llamando al servicio web 
+    let respuesta=await Axios.get(`${config.servicioVideoapi}/videos/${videoId}`, 
+      {
+        headers:{
+            Authorization: `Bearer ${tokenjwt} `,
+            Micabecera: 'yomismo'
+
+        }
+      }
+    ); //Axios.post
+
+    console.log("Respuesta servicio web a load video"+`Config.servicioVideoapi/videos/${videoId}`, respuesta.data);
+    return respuesta.data;
+});
+
+
+
+
+// *** Reducer Asincrono   videos/crearVideo ****
 // Definir y exportar Reducer/action 'crearVideo' que se resuelve en modo asíncrono. 
 // createAsyncThunk retorna una promise que deja el resultado en action.payload
-// *** CREARVIDEO ****
 export const crearVideo = createAsyncThunk ('videos/crearVideo', async ( formData, thunkAPI )=>{
     console.log("Entrando en reducer crearVideo()...");
     //thunkAPI permite acceder al store/state global de Redux. 
@@ -76,7 +114,8 @@ export const crearVideo = createAsyncThunk ('videos/crearVideo', async ( formDat
     return respuesta.data;
 });
 
-//REDUCER:  clearVideos
+
+//REDUCER sincrono:  videos/clearVideos
 let clearVideosReducer=(state,action)=>{
     console.log("Entrando en reducer clearVideos, action=",action);
     let newstate = state;
@@ -87,7 +126,7 @@ let clearVideosReducer=(state,action)=>{
     return newstate;
 }
 
-//REDUCER:  cambiaEstado
+//REDUCER sincrono:  videos/cambiaEstado
 let cambiaEstadoReducer=(state,action)=>{
     console.log("Entrando en reducer vidoes.cambiaEstado, action=", action);
     let newstate = state;
@@ -105,7 +144,9 @@ let estadoInicial = {
         videos:[],    //array con los videos ya descargados
         nextPage: 1,  //siguiente pagina a mostrar/descargar ?
         total: 1      //Numero total de videos existente 
- }
+    },
+    videoActual: null, // video actual en caso de un solo video cargado con getVideo
+
 }
 
 // CREAR EL SLICE videoSlice (Estado para la entidad Videos) 
@@ -162,6 +203,15 @@ let videoSlice = createSlice({
                 total:0,
                 videos: state.data.videos.concat(action.payload.videos)
             }
+        },
+        [getVideo.fulfilled]: (state, action)=>{
+            state.status="Cargado 1 OK";
+            state.videoActual = action.payload; // guarda en videoActual el objeto video devuelto por el servicio web externo
+
+        },
+        [getVideo.rejected]: (state, action)=>{
+            state.status="Fallo en la carga 1 video.";
+            state.videoActual = null;
         },
 
     }

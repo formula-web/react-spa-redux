@@ -12,6 +12,7 @@ let Videoplayer = ({video})=>{
             player.current = new PlayerSdk(`#appPlayer-${video.id}`,{muted:true});
             player.current.mute();    
             player.current.play();
+            player.current.setLoop(true);
             console.log("....nuevo sdk player.current para video.id=",video.id, player.current)
         }
     },[video.id])    //Se ejecuta cada vez que cambie video.id

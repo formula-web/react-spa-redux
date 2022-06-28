@@ -4,13 +4,17 @@ import { loadVideos } from "../store/videos";
 import Videoplayer from "./Videoplayer";
 import config from '../config/config';
 import { useRef } from "react";
+import store from "../store";
 
+// Componente Videos 
 let Videos=( {videos} )=>{
     console.log("<<<<<<VIDEOS.JSX  inicio >>>>>>");
     let primeravez = useRef(false);
-    //const [ stateVideos,setstateVideos  ] = useState( useSelector(state=>state.sliceVideos) );
-    let stateVideos = useSelector(state=>state.sliceVideos);//recoge estado videos
+
+    //-- recoger y suscribirse a los cambios en state.sliceVideos:
+    let stateVideos = useSelector(state=>state.sliceVideos); //recoge estado videos
     console.log("Videos en el state:", stateVideos.data.videos.length);
+    
     let dispatcher  = useDispatch(); //dispatcher para invocar reducers/actions 
     //console.log("stateVideos:", stateVideos.data.videos[0].title);
     

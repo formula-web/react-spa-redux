@@ -5,6 +5,10 @@ import Videoplayer from "./Videoplayer";
 import config from '../config/config';
 import { useRef } from "react";
 import store from "../store";
+import { likeVideo } from "../store/likes";
+
+
+
 
 // Componente Videos 
 let Videos=( {videos} )=>{
@@ -13,7 +17,7 @@ let Videos=( {videos} )=>{
 
     //-- recoger y suscribirse a los cambios en state.sliceVideos:
     let stateVideos = useSelector(state=>state.sliceVideos); //recoge estado videos
-    console.log("Videos en el state:", stateVideos.data.videos.length);
+     console.log("Videos en el state:", stateVideos.data.videos.length);
     
     let dispatcher  = useDispatch(); //dispatcher para invocar reducers/actions 
     //console.log("stateVideos:", stateVideos.data.videos[0].title);
@@ -22,7 +26,6 @@ let Videos=( {videos} )=>{
     // y llamar al reducer loadVideos del state videos
     useEffect( 
         ()=>{ 
-            if ( primeravez.current ) return;
             console.log("videos.jsx - carga inicial - llama a loadvideos()")
             if ( true ) {
                 //console.log("<Videos> useEffect al Montarse el componente. ¿Se ejecuta dos veces?");
@@ -32,6 +35,11 @@ let Videos=( {videos} )=>{
         }
         ,[]); //,[]  Indica que se ejecuta al renderizar por primera vez. Equivale a comtponentDidMount()
     
+    let darLike=({videoId, like})=>{
+        dispatcher( likeVideo({videoId,like}));
+    }
+
+
     return (
         <>
            {     console.log("_____videos en state al renderizarlos:", stateVideos.data.videos)   }
@@ -41,8 +49,10 @@ let Videos=( {videos} )=>{
                 { stateVideos.data.videos.map(video=>(<div key={video.id}>
                 <div  id={video.id}> {video.id} - {video.title} ( {`${config.servidorVideos}/${video.remoteMp4}` } )</div>
                 <Videoplayer video={video} />
-         
-            </div>
+                <button onClick={()=>darLike({videoId:video.id, like:true})}>Like</button> 
+                <span>{ video.isLikedByCurrentUser ? "❤" :"No"  }</span>
+                <button onClick={()=>darLike({videoId:video.id, like:false})}>Unlike</button> 
+                </div>
                 )) }
             </div>
           <h2>.........................................................</h2>

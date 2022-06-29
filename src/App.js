@@ -22,10 +22,7 @@ import Perfil from './usuarios/Perfil';
 let Home = () => {
   console.log("<<<<<<HOME>>>>>>. Estado tareas:",store.getState().sliceTareas.tareas);
   let dispatcher = useDispatch();
-  let onclick =()=>{
-    console.log("Store:",store, "state:", store.getState(), "todos=",store.getState().sliceTareas.tareas); 
-    store.dispatch( {type:'ADD_TODO', text:'pacop'} );
-  }
+
   return (
     <>
     <h1>Home con Routes de BrowserRouter (Single Page Apps)</h1>
@@ -36,7 +33,8 @@ let Home = () => {
         <p><Link to='/videos/nuevo'>Link a /videos/nuevo</Link></p>
         <p><Link to='/usuarios'>Link a /usuarios</Link></p>
         <p><Link to='/usuarios/login'>Link a /usuarios/login</Link></p>
-        <button onClick={ onclick }>Dispath una Action</button>
+        <p><Link to='/usuarios/miperfil'>Mi Perfil</Link></p>
+
       </div>
       <div id='div2'>
         <h2>APLICACION DE TAREAS</h2>

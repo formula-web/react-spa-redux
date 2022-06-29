@@ -126,6 +126,18 @@ let clearVideosReducer=(state,action)=>{
     return newstate;
 }
 
+//REDUCER sincrono:  videos/borrar1Video
+let borrar1VideoReducer=(state,action)=>{
+    console.log("Entrando en reducer borra1Video, action=",action);
+    let newstate = state;
+    newstate.status= 'Un video borrado';
+    newstate.data.videos = state.data.videos.filter ( (video)=>{ if (video.id != action.videoid) return true; else return false; });
+    newstate.data.total--;
+    console.log("...borra1Video retorna estado:", newstate.data);
+    return newstate;
+}
+
+
 //REDUCER sincrono:  videos/cambiaEstado
 let cambiaEstadoReducer=(state,action)=>{
     console.log("Entrando en reducer vidoes.cambiaEstado, action=", action);
@@ -155,6 +167,7 @@ let videoSlice = createSlice({
     initialState: estadoInicial,      //Estado Inicial 
     reducers: {                       // reducers 'normales'  es decir síncronos:
             clearVideos: clearVideosReducer,
+            borrar1Video: borrar1VideoReducer,
             cambiaEstado: cambiaEstadoReducer
     },
 
@@ -221,7 +234,7 @@ let videoSlice = createSlice({
 
 // Exportar el Slice (no se por qué se exporta videoSlice.reducer en lugar de videoSlice)
 export default videoSlice.reducer;
-export const { clearVideos, cambiaEstado } = videoSlice.actions;
+export const { borrar1Video, clearVideos, cambiaEstado } = videoSlice.actions;
 
 //console.log("UVIDEOSSLICE.ACTIONS:", videoSlice.actions);
 

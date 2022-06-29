@@ -31,7 +31,7 @@ export const loadVideos = createAsyncThunk ('videos/loadVideos', async (  pagina
     //console.log('...tokenjwt:',tokenjwt );
 
     // descarga video en asincrono llamando al servicio web 
-    let respuesta=await Axios.get(`${config.servicioVideoapi}/videos?page=${pagina}`, 
+    let respuesta=await Axios.get(`${config.servicioVideoapi}${config.endPointVideos}?page=${pagina}`, 
       {
         headers:{
             Authorization: `Bearer ${tokenjwt} `,
@@ -44,6 +44,41 @@ export const loadVideos = createAsyncThunk ('videos/loadVideos', async (  pagina
     console.log("Respuesta servicio web"+`Config.servicioVideoapi/videos?page=${pagina}`, respuesta.data);
     return respuesta.data;
 });
+
+
+// *** REDUCER ASINCRONO  videos/loadVideosUser ****
+// (identico a loadVideos, solo cambia el path del servicio remoto. Retorna solo los videos del usuario cuyo token se envia)
+// Definir y exportar Reducer
+// Definir y exportar Reducer/action 'loadVideos' que se resuelve en modo asíncrono. 
+// createAsyncThunk retorna una promise que deja el resultado en action.payload
+export const loadVideosUser = createAsyncThunk ('videos/loadVideosUser', async (  args, thunkAPI )=>{
+    console.log("Entrando en reducer loadVideosUser()... thunkAPI:",thunkAPI.getState() );
+    //thunkAPI permite acceder al store/state global de Redux. Cogemos el token jwt qie está en la propiedad user del state de sliceUsuario:
+    let tokenjwt=null;
+    try {
+        tokenjwt = thunkAPI.getState().sliceUsuario.user.jwtToken;
+    }catch {
+        console.log('loadVideosUser(): no hay token jwt');
+        return Promise.reject("No ha token jwt. Usuario no logado ?");
+    }
+    if (!tokenjwt) return Promise.reject("Token vacio");
+    
+    //console.log('...tokenjwt:',tokenjwt );
+
+    // descarga video en asincrono llamando al servicio web 
+    let respuesta=await Axios.get(`${config.servicioVideoapi}${config.endPointVideosUsuario}`, 
+      {
+        headers:{
+            Authorization: `Bearer ${tokenjwt} `,
+            Micabecera: 'yomismo'
+        }
+      }
+    ); //Axios.post
+
+    console.log("Respuesta servicio web"+`Config.servicioVideoapi/users/videos`, respuesta.data);
+    return respuesta.data;
+});
+
 
 
 // *** REDUCER ASINCRONO  videos/getVideo ****
@@ -225,6 +260,10 @@ let videoSlice = createSlice({
         [getVideo.rejected]: (state, action)=>{
             state.status="Fallo en la carga 1 video.";
             state.videoActual = null;
+        },
+        [loadVideosUser.fulfilled]: (state, action)=>{
+            state.status="Cargado videos usuario OK";
+            state.data.videos = action.payload;
         },
 
     }

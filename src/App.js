@@ -17,6 +17,7 @@ import Footer from './tareas/Footer';
 import TodoList from './tareas/TodoList';
 import VideosContainer from './videos/containers/VideosContainer';
 import VideoShow from './videos/VideoShow';
+import Perfil from './usuarios/Perfil';
 
 let Home = () => {
   console.log("<<<<<<HOME>>>>>>. Estado tareas:",store.getState().sliceTareas.tareas);
@@ -153,7 +154,7 @@ function App() {
                 <Route path='' element={<NoImplementado />} />
                 <Route path='registro' element={<NoImplementado />} />
                 <Route path='login' element={<SignIn />} />
-                <Route path=':id' element={<NoImplementado />} />
+                <Route path='miperfil' element={<Perfil />} />
                 <Route path=':id/videos' element={<NoImplementado />} />
               </Route>
               <Route path='/videos'  >

@@ -6,13 +6,16 @@ import storage from 'redux-persist/lib/storage';  // Usado para hacer state pers
 import userSlice from './usuario';  //Importar userSlice.reducer creado en usuario.js
 import videoSlice from './videos';  //Importar videoSlice.reducer creado en videos.js
 import tareaSlice from './tareas';  //importar tareaSlice.reducer 
+import likesSlice from './likes';   //importr  lkesSlices.reducer
 
 
 //Definir REDUX STORE === STATE GLOBAL
 const slices = combineReducers({
     sliceUsuario : userSlice,   // userSlice es el substore de usuario
-    sliceVideos  : videoSlice,  // videoSlice es el substore de videos.   Ambos se conbinan en "reducer" para hacerlos persisitir con redux-persist: 
+    sliceVideos  : videoSlice,  // videoSlice es el substore de videos. Se conbinan en "reducer" para hacerlos persisitir con redux-persist: 
     sliceTareas  : tareaSlice,  // tareaSlice es el substore de videos.
+    sliceLikes   : likesSlice,  // likesSlice es el substore de likes a videos
+    
 })
 
 //Opcional. Configuracion de Persistencia de estados en disco creando un objeto persistConfig

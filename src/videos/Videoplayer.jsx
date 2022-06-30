@@ -6,14 +6,14 @@ import config from '../config/config';
 
 let Videoplayer = ({video})=>{
     let player = useRef(null);
-    console.log("entra a renderizar un Videoplayer con video.id=", video.id, " el player sdk es=", player.current)
+    //console.log("entra a renderizar un Videoplayer con video.id=", video.id, " el player sdk es=", player.current)
     useEffect(()=>{
         if (!player.current) {
             player.current = new PlayerSdk(`#appPlayer-${video.id}`,{muted:true});
             player.current.mute();    
             player.current.play();
             player.current.setLoop(true);
-            console.log("....nuevo sdk player.current para video.id=",video.id, player.current)
+            //console.log("....nuevo sdk player.current para video.id=",video.id, player.current)
         }
     },[video.id])    //Se ejecuta cada vez que cambie video.id
     return (

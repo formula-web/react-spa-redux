@@ -184,6 +184,18 @@ let cambiaEstadoReducer=(state,action)=>{
     return newstate;
 }
 
+//REDUCER sincrono:  videos/ponerLike  (poner like en el estado local ya que likeVideo lo hace solo en la bbdd remota)
+let ponerLikeReducer=(state,action)=>{
+    console.log("___________________Entrando en reducer ponerLike, action=", action);
+    let newstate = state;
+    newstate.status= action.estado;
+    newstate.data.videos=Array.from(state.data.videos);
+    let cual = newstate.data.videos.findIndex ( (video)=>video.id == action.videoId );
+    if (cual >=0) newstate.data.videos[cual].isLikedByCurrentUser= action.like;
+    return newstate;
+}
+
+
 // CREAR EL SLICE videoSlice (Estado para la entidad Videos) 
 let estadoInicial = {
     status: 'Inicial Videos',
@@ -203,7 +215,8 @@ let videoSlice = createSlice({
     reducers: {                       // reducers 'normales'  es decir síncronos:
             clearVideos: clearVideosReducer,
             borrar1Video: borrar1VideoReducer,
-            cambiaEstado: cambiaEstadoReducer
+            cambiaEstado: cambiaEstadoReducer,
+            ponerLike : ponerLikeReducer
     },
 
     // reducers que son de tipo asincrono. Un reducer por cada estado de la promise retornada por createAsyncThunk
@@ -273,7 +286,7 @@ let videoSlice = createSlice({
 
 // Exportar el Slice (no se por qué se exporta videoSlice.reducer en lugar de videoSlice)
 export default videoSlice.reducer;
-export const { borrar1Video, clearVideos, cambiaEstado } = videoSlice.actions;
+export const { borrar1Video, clearVideos, cambiaEstado, ponerLike } = videoSlice.actions;
 
 //console.log("UVIDEOSSLICE.ACTIONS:", videoSlice.actions);
 

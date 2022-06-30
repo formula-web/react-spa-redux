@@ -18,35 +18,10 @@ import TodoList from './tareas/TodoList';
 import VideosContainer from './videos/containers/VideosContainer';
 import VideoShow from './videos/VideoShow';
 import Perfil from './usuarios/Perfil';
+import Home from './Home';
 
-let Home = () => {
-  console.log("<<<<<<HOME>>>>>>. Estado tareas:",store.getState().sliceTareas.tareas);
-  let dispatcher = useDispatch();
 
-  return (
-    <>
-    <h1>Home con Routes de BrowserRouter (Single Page Apps)</h1>
-    <div id="home">
-      <div id='div1'>
-        <h2>Aplicacion Tiktok</h2>
-        <p><Link to='/videos'>Link a /videos</Link></p>
-        <p><Link to='/videos/nuevo'>Link a /videos/nuevo</Link></p>
-        <p><Link to='/usuarios'>Link a /usuarios</Link></p>
-        <p><Link to='/usuarios/login'>Link a /usuarios/login</Link></p>
-        <p><Link to='/usuarios/miperfil'>Mi Perfil</Link></p>
 
-      </div>
-      <div id='div2'>
-        <h2>APLICACION DE TAREAS</h2>
-        <AddTodo  />
-        <VisibleTodoList  />
-
-        <Footer />
-      </div>
-    </div>
-    </>
-  )
-}
 let NoImplementado = () => {
   return (<h2>Path-Elemento no implementado</h2>)
 }

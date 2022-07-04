@@ -7,6 +7,7 @@ import AddTodo from "./tareas/containers/AddTodo";
 import VisibleTodoList from "./tareas/containers/VisibleTodoList";
 import {useDispatch } from 'react-redux';
 import Footer from "./tareas/Footer";
+import tema from './theme';
 
 //estilos reutilizables
 let botonenviar = css`
@@ -30,7 +31,7 @@ export const Boton2 = styled(Boton)`
 ` ;
 
 const Container = styled.div`
-  padding: 100px;
+  padding: ${(tema)=>{console.log("TEMA:",tema.theme.dims.paddingamplio); return tema.theme.dims.paddingamplio }};
   background-color: #0ac1a8;
   & a {
     color: red;
@@ -62,7 +63,7 @@ let Home = () => {
 
 
     return (
-      <>
+      <Container>
       <h1>HOME (Single Page Apps)</h1>
       <div id="home">
         <div id='div1'>
@@ -73,7 +74,7 @@ let Home = () => {
           <p><Link to='/usuarios/login'>Link a /usuarios/login</Link></p>
           <p><Link to='/usuarios/miperfil'>Mi Perfil</Link></p>
           <Boton2 id='boton' color='#f9f929' onClick={ ()=>navegar('/usuarios/miperfil')}>Mi Perfil</Boton2>
-          <Container><a>Enlace color rojo</a> </Container>
+
          
          
 
@@ -86,7 +87,7 @@ let Home = () => {
           <Footer />
         </div>
       </div>
-      </>
+      </Container>
     )
   }
   export default Home;

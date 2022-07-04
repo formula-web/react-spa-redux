@@ -19,6 +19,8 @@ import VideosContainer from './videos/containers/VideosContainer';
 import VideoShow from './videos/VideoShow';
 import Perfil from './usuarios/Perfil';
 import Home from './Home';
+import { ThemeProvider } from 'styled-components';
+import tema from './theme';
 
 
 
@@ -120,7 +122,8 @@ function App() {
       <div className="reloj"><Reloj /></div>
       <BrowserRouter>
         <Provider store={store}>    
-        <PersistGate loading={null} persistor={ persistor }>
+        <PersistGate loading={null} persistor={ persistor }>   
+          <ThemeProvider theme={tema}>
           <Routes>
               <Route path='/' element={<Home />}></Route>
               <Route path='/usuarios' element={<ComunUsuarios />} >
@@ -137,6 +140,7 @@ function App() {
               </Route>
               <Route path='*' element={<Error404 />} />
           </Routes>
+          </ThemeProvider>
         </PersistGate>
 
 

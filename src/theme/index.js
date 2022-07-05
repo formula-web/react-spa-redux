@@ -1,6 +1,6 @@
 // THEME CSS definicion de theme css global
 
-const tema={
+const nombrecualquiera={    //da igual como se llame al final queda objetoimportado.theme.colores 
     colores: {
         blanco:'#ffffff',
         oscuro:'#27212e',
@@ -13,4 +13,4 @@ const tema={
         paddingamplio: '10vw',
     }
 }
-export default tema;
+export default nombrecualquiera;

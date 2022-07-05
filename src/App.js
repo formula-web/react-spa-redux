@@ -21,6 +21,7 @@ import Perfil from './usuarios/Perfil';
 import Home from './Home';
 import { ThemeProvider } from 'styled-components';
 import tema from './theme';
+import LayoutApp from './theme/LayoutApp';
 
 
 
@@ -124,22 +125,24 @@ function App() {
         <Provider store={store}>    
         <PersistGate loading={null} persistor={ persistor }>   
           <ThemeProvider theme={tema}>
-          <Routes>
-              <Route path='/' element={<Home />}></Route>
-              <Route path='/usuarios' element={<ComunUsuarios />} >
-                <Route path='' element={<NoImplementado />} />
-                <Route path='registro' element={<NoImplementado />} />
-                <Route path='login' element={<SignIn />} />
-                <Route path='miperfil' element={<Perfil />} />
-                <Route path=':id/videos' element={<NoImplementado />} />
-              </Route>
-              <Route path='/videos'  >
-                <Route path='' element={<ComunVideos />} />
-                <Route path='nuevo' element={<VideosNuevo />} />
-                <Route path=':id' element={<VideoShow  />}></Route>
-              </Route>
-              <Route path='*' element={<Error404 />} />
-          </Routes>
+            <LayoutApp>
+              <Routes>
+                  <Route path='/' element={<Home />}></Route>
+                  <Route path='/usuarios' element={<ComunUsuarios />} >
+                    <Route path='' element={<NoImplementado />} />
+                    <Route path='registro' element={<NoImplementado />} />
+                    <Route path='login' element={<SignIn />} />
+                    <Route path='miperfil' element={<Perfil />} />
+                    <Route path=':id/videos' element={<NoImplementado />} />
+                  </Route>
+                  <Route path='/videos'  >
+                    <Route path='' element={<ComunVideos />} />
+                    <Route path='nuevo' element={<VideosNuevo />} />
+                    <Route path=':id' element={<VideoShow  />}></Route>
+                  </Route>
+                  <Route path='*' element={<Error404 />} />
+              </Routes>
+          </LayoutApp>
           </ThemeProvider>
         </PersistGate>
 

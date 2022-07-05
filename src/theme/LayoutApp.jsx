@@ -16,6 +16,15 @@ let LayoutContainer = styled.div`
     }
 `;
 
+//Contenedor pequeño para fotos
+export let SmallContainer = styled.div`
+    width:${(tema)=>tema.theme.dims.width.small};
+    max-width: 100vw ;
+    margin: 0 auto;
+    background: pink;
+`
+
+
 let LayoutApp = (props)=>{
     return (
         <LayoutContainer>

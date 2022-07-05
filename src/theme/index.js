@@ -11,6 +11,24 @@ const nombrecualquiera={    //da igual como se llame al final queda objetoimport
     },
     dims: {
         paddingamplio: '10vw',
+        width:{
+            small: '20em',
+        },
+        margin:{
+            normal: '2em',
+            intersection: '1em'
+        },
+        fonts: {
+            small: '0.8em',
+        },
+        circle: {
+            small:'1em',
+        },
+        borderRadius:{
+            small:'0.4em',
+        }
+
+      
     }
 }
 export default nombrecualquiera;

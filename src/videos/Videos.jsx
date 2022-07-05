@@ -1,3 +1,6 @@
+//Componente VIDEOS visualiza un listado de videos
+//usa el componente VIDEO para visualizar un solo video
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadVideos, ponerLike } from "../store/videos";
@@ -6,6 +9,8 @@ import config from '../config/config';
 import { useRef } from "react";
 import store from "../store";
 import { likeVideo } from "../store/likes";
+import { SmallContainer} from "../theme/LayoutApp";
+import Video from "./video";
 
 
 
@@ -46,22 +51,17 @@ let Videos=( {videos} )=>{
 
     return (
         <>
-           {     console.log("_____videos en state al renderizarlos:", stateVideos.data.videos)   }
-        <h2> Inicio Componente VIDEOS...</h2>
-            <h3>Status: {stateVideos.status}   </h3>
+          <h2> Listado de Videos</h2>
             <div>
-                { stateVideos.data.videos.map(video=>(<div key={video.id}>
-                <div  id={video.id}> {video.id} - {video.title} ( {`${config.servidorVideos}/${video.remoteMp4}` } )</div>
-                <Videoplayer video={video} />
-                <button onClick={()=>darLike({videoId:video.id, like:true})}>Like</button> 
-                <span>{ video.isLikedByCurrentUser ? " ❤ " :" No "  }</span>
-                <button onClick={()=>darLike({videoId:video.id, like:false})}>Unlike</button> 
-                </div>
+                <SmallContainer>
+                { stateVideos.data.videos.map(video=>(
+                   <Video video={video} key={video.id} />
                 )) }
+                </SmallContainer>
             </div>
           <h2>.........................................................</h2>
           {     console.log("<<<<<<VIDEOS.JSX  fin >>>>>>") }
-     </>
+        </>
     )
 }
 

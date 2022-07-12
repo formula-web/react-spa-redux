@@ -14,7 +14,8 @@ const nombrecualquiera={    //da igual como se llame al final queda objetoimport
     },
     dims: {
         padding: {
-            largepadding: '10vw'
+            largepadding: '10vw',
+            medio: '2vw'
         },
         paddingamplio: '10vw',
         width:{
@@ -32,6 +33,9 @@ const nombrecualquiera={    //da igual como se llame al final queda objetoimport
         },
         borderRadius:{
             small:'0.4em',
+        },
+        sombras: {
+            prof2: '0 10px 2px'
         }
 
       
@@ -46,9 +50,10 @@ export let SvgButton = styled(ReactSVG)`
         display: inline-block;
         vertical-align: bottom;     
     } //Propiedades css del SvgButton
-    background-color:${({theme})=>theme.colores.black } ;
+    background-color:${({theme,activo})=>activo? theme.colores.acento : theme.colores.gris } ;
     cursor: pointer;
     border-radius: 50%;
+    padding: 10px;
     width: ${({theme})=>theme.dims.circle.medium };
     height: ${({theme})=>theme.dims.circle.medium };
     display: flex;
@@ -60,6 +65,7 @@ export let SvgButton = styled(ReactSVG)`
     }
 `;
 
+//Boton sin estilos. Como contenido de este boton se puede poner un componente SvgButton
 export let ClearButton=styled.button`
     outline:0;
     border:0;
@@ -68,3 +74,14 @@ export let ClearButton=styled.button`
     display: block;
 `
 ;
+
+export let Titulo = styled.h1`
+    font-size: 1.5em;
+    font-weight: bold;
+    display: inline-block;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-left: ${({theme})=>theme.dims.margin.intersection };
+    vertical-align: middle;
+`;
+

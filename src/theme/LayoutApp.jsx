@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import Pie from "../elementos/Footer";
+import Cabecera from "../elementos/Header";
 
 //LayoutContainer no tiene contenido, solo estilo css con styled
 let LayoutContainer = styled.div`
@@ -28,12 +30,12 @@ export let SmallContainer = styled.div`
 let LayoutApp = (props)=>{
     return (
         <LayoutContainer>
-            <nav><p>Menu</p></nav>
+           <Cabecera />
             <main>
                 <p>MAIN</p>
                 {props.children}
             </main>
-            <footer><p>Footer</p></footer>
+           <Pie />
         </LayoutContainer>
     )
 }

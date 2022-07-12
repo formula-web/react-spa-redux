@@ -8,7 +8,8 @@ import Videoplayer from "./Videoplayer";
 import { likeVideo } from "../store/likes";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import BotonLike from "./BotonLike";
+import BotonLike, { BotonUnLike } from "./BotonLike";
+import BotonShare from "./BotonShare";
 
 //VideoContainer
 let VideoContainer = styled.div `
@@ -56,9 +57,8 @@ let Video = ({video})=>{
             <aside className='sidebar'>
                 <BotonLike video={video} like={true} darLike={darLike} />
                 <br></br>
-                <span>{ video.isLikedByCurrentUser ? " ❤ " :" No "  }</span>
-                <br></br>
-                <BotonLike video={video} like={false} darLike={darLike} />
+                <BotonUnLike video={video} darLike={darLike} />
+                <BotonShare></BotonShare>
             </aside>
             <div className="user-info">
                 <h2>{video.title}</h2>

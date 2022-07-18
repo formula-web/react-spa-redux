@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {logOut, signIn, signUp} from '../store/usuario.js';    // Action para login de usuario definida en store/index.js
 import sliceVideos, {clearVideos} from '../store/videos.js';
 import store from '../store';
+import UserFormLayout from './UserFormLayout.jsx';
+import AppInput from '../elementos/AppInputs.jsx';
 
 //Componente SignIn renderiza un boton de Login / Logout segun el estado del usuario
 // para login hara dispatch a la accion signIn
@@ -25,13 +27,15 @@ let SignIn = ( props) =>{
         dispatcher ( signIn( {credenciales:credenciales} ) )  // dispather ( accion ) esquema para invocar a la accion signIn del userSlice del Store
         //dispatcher({type:'usuario/signIn',credenciales:credenciales});  -->así no funciona por ser un reducer asíncrono 
     })
-    let hacerLogOut = ()=>{
+    let hacerLogOut = (ev)=>{
+        ev.preventDefault();
         console.log("hacerLogOut().. llama a dispatcher(logOut) ");
         dispatcher ( {type:logOut ,estado:'Logoff'} ) // dispather(action) invocar al reducer 'logOut' del userSlice cuyo name = 'usuario'
         dispatcher(  {type: clearVideos }  );
         dispatcher(  {type:'videos/cambiaEstado', estado:'estado cambiado'});
     }
-    let hacerSignUp = ()=>{
+    let hacerSignUp = (ev)=>{
+        ev.preventDefault();
         let credenciales = 
         { email: document.getElementsByName('email')[0].value, 
           password:document.getElementsByName('password')[0].value,
@@ -57,22 +61,20 @@ let SignIn = ( props) =>{
     }
 
     return (
-        <div>
+        <UserFormLayout>
             <form onSubmit={  botonLogin }>
-                <input type='email' name='email' placeholder='Email?'   />
-                <input type='password' name='password' placeholder='Contraseña'  ></input>
-                <input type='submit' value='Enviar' />
+                <AppInput type='email' name='email'   label='Tu email' />
+                <AppInput type='password' name='password' label='Contraseña'  ></AppInput>
+                <input type='submit' value='Login (submit)' />
+
+           
+                { usuario 
+                ? <button onClick={ hacerLogOut }>LogOut </button>
+                : <button onClick={ botonLogin }>Login  </button>
+                }
+                <button onClick = { hacerSignUp }>Sign Up</button> 
             </form>
-
-
-            { usuario 
-            ? <button onClick={ hacerLogOut }>LogOut </button>
-            : <button onClick={ botonLogin }>Login  </button>
-            }
-            <br></br>
-            <button onClick = { hacerSignUp }>Sign Up</button> 
-   
-        </div>
+        </UserFormLayout>
     )
 }
 

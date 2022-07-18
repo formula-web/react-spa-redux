@@ -1,7 +1,12 @@
 // THEME CSS definicion de theme css global
 
 import { ReactSVG } from "react-svg";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
+
+export let EstilosGlobales = createGlobalStyle`
+    *{box-sizing: border-box}
+`;
+
 
 const nombrecualquiera={    //da igual como se llame al final queda objetoimportado.theme.colores 
     colores: {
@@ -15,13 +20,15 @@ const nombrecualquiera={    //da igual como se llame al final queda objetoimport
     dims: {
         padding: {
             largepadding: '10vw',
-            medio: '2vw'
+            medio: '0.5vw'
         },
         paddingamplio: '10vw',
         width:{
             small: '20em',
+            forms: '17.5em'
         },
         margin:{
+            small: '1em',
             normal: '2em',
             intersection: '1em'
         },
@@ -33,9 +40,10 @@ const nombrecualquiera={    //da igual como se llame al final queda objetoimport
         },
         borderRadius:{
             small:'0.4em',
+            normal: '0.6em'
         },
         sombras: {
-            prof2: '0 10px 2px'
+            prof2: '0 2px 2px'
         }
 
       
@@ -85,3 +93,10 @@ export let Titulo = styled.h1`
     vertical-align: middle;
 `;
 
+export let ContainerCentrado = styled.div `
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width:  100%;
+`;

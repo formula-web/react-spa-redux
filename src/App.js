@@ -20,8 +20,9 @@ import VideoShow from './videos/VideoShow';
 import Perfil from './usuarios/Perfil';
 import Home from './Home';
 import { ThemeProvider } from 'styled-components';
-import tema from './theme';
+import tema, { EstilosGlobales } from './theme';
 import LayoutApp from './theme/LayoutApp';
+import UserFormLayout from './usuarios/UserFormLayout';
 
 
 
@@ -120,17 +121,18 @@ function App() {
 
   return ( 
     <div className="App">
-      <div className="reloj"><Reloj /></div>
+   
       <BrowserRouter>
         <Provider store={store}>    
         <PersistGate loading={null} persistor={ persistor }>   
           <ThemeProvider theme={tema}>
+            <EstilosGlobales />
             <LayoutApp>
               <Routes>
                   <Route path='/' element={<Home />}></Route>
                   <Route path='/usuarios' element={<ComunUsuarios />} >
                     <Route path='' element={<NoImplementado />} />
-                    <Route path='registro' element={<NoImplementado />} />
+                    <Route path='registro' element={<UserFormLayout />} />
                     <Route path='login' element={<SignIn />} />
                     <Route path='miperfil' element={<Perfil />} />
                     <Route path=':id/videos' element={<NoImplementado />} />
@@ -143,6 +145,7 @@ function App() {
                   <Route path='*' element={<Error404 />} />
               </Routes>
           </LayoutApp>
+ 
           </ThemeProvider>
         </PersistGate>
 

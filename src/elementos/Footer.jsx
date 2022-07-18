@@ -27,6 +27,8 @@ export default styled(Footer)`
 `;
 
 let BotonPie = styled(Link)`
+     border-radius: ${({theme })=>theme.dims.borderRadius.normal };
+     text-decoration: none;
      padding: ${(tema)=>tema.theme.dims.padding.medio };
      background-color:${({theme})=>theme.colores.acento } ;
      color: ${({theme})=>theme.colores.blanco } ;

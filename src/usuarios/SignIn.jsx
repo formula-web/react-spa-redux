@@ -23,17 +23,38 @@ let SignIn = ( props) =>{
     console.log("Render Componente SignIn.usuario :", usuario);
     console.log("Estado:", estado.status);
 
-    let hacerSignIn = ( credenciales=>{
+
+    let HacerLogin = ( credenciales=>{
         dispatcher ( signIn( {credenciales:credenciales} ) )  // dispather ( accion ) esquema para invocar a la accion signIn del userSlice del Store
         //dispatcher({type:'usuario/signIn',credenciales:credenciales});  -->así no funciona por ser un reducer asíncrono 
     })
-    let hacerLogOut = (ev)=>{
+    
+
+    let botonLogin = (ev)=>{
         ev.preventDefault();
+    
+        console.log("miSubmit()",ev.target);
+        let credenciales = 
+        { email: document.getElementsByName('email')[0].value, 
+          password:document.getElementsByName('password')[0].value
+        }
+        console.log("Llamada a HacerLogin con Credenciales:", credenciales);
+        HacerLogin(credenciales);
+    }
+    let botonLogOut = (ev)=>{
+        ev.preventDefault();
+        HacerLogOut();
+    }
+
+
+    let HacerLogOut = ()=>{
         console.log("hacerLogOut().. llama a dispatcher(logOut) ");
         dispatcher ( {type:logOut ,estado:'Logoff'} ) // dispather(action) invocar al reducer 'logOut' del userSlice cuyo name = 'usuario'
         dispatcher(  {type: clearVideos }  );
         dispatcher(  {type:'videos/cambiaEstado', estado:'estado cambiado'});
     }
+    
+
     let hacerSignUp = (ev)=>{
         ev.preventDefault();
         let credenciales = 
@@ -46,36 +67,31 @@ let SignIn = ( props) =>{
     }
 
     //const { register, handleSubmit } = useForm();
-    let botonLogin = (ev)=>{
-        ev.preventDefault();
-        console.log("miSubmit()",ev.target);
-        let credenciales = 
-        { email: document.getElementsByName('email')[0].value, 
-          password:document.getElementsByName('password')[0].value
-        }
-        console.log("Llamada a hacerSignIn con Credenciales:", credenciales);
-        hacerSignIn(credenciales);
-    }
-    let MostrarUsuario=( props )=>{
-        return (<>Usuario: {props.usuario?props.usuario: "."}</>)
-    }
+
 
     return (
         <UserFormLayout>
             <form onSubmit={  botonLogin }>
                 <AppInput type='email' name='email'   label='Tu email' />
                 <AppInput type='password' name='password' label='Contraseña'  ></AppInput>
-                <input type='submit' value='Login (submit)' />
+                <AppInput type='submit' value='Login (submit)' />
 
-           
                 { usuario 
-                ? <button onClick={ hacerLogOut }>LogOut </button>
+                ? <button onClick={ botonLogOut }>LogOut </button>
                 : <button onClick={ botonLogin }>Login  </button>
-                }
+            }
+
                 <button onClick = { hacerSignUp }>Sign Up</button> 
             </form>
         </UserFormLayout>
     )
 }
 
+
+
+let MostrarUsuario=( props )=>{
+    return (<>Usuario: {props.usuario?props.usuario: "."}</>)
+}
+
 export default SignIn;
+ 

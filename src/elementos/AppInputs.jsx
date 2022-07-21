@@ -24,6 +24,7 @@ export default AppInput;
 
 let Input = styled.input`
     padding: ${({theme})=>theme.dims.padding.medio };
+    font-size: 1em;
     display: block;
     box-sizing: border-box;
     margin-top: ${({theme})=>theme.dims.margin.small };

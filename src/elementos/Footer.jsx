@@ -1,15 +1,21 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+
 let Footer = (props)=> {
+    let usuario = useSelector( (state)=>state.sliceUsuario.user  );
     return (
         <footer className={props.className}>    
             <Link to="/">Home</Link>
             <Link to="/videos">Videos</Link>
             <BotonPie to="/videos/nuevo">+</BotonPie>
             <Link to = "/usuarios/miperfil">Perfil</Link>
-
+            { usuario 
+                ? <button >LogOut </button>
+                : <button >Login  </button>
+            }
 
         </footer>
     )

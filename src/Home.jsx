@@ -31,7 +31,7 @@ export const Boton2 = styled(Boton)`
 ` ;
 
 const Container = styled.div`
-  padding: ${(tema)=>{console.log("TEMA:",tema.theme.dims.paddingamplio); return tema.theme.dims.paddingamplio }};
+  padding: ${(tema)=>{console.log("TEMA:",tema.theme.dims.paddingamplio); return tema.theme.dims.padding.medio}};
   background-color: #0ac1a8;
   & a {
     color: red;

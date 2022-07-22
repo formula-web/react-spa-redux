@@ -234,13 +234,12 @@ let videoSlice = createSlice({
             }
         },
         [loadVideos.rejected]: (state, action)=>{
-            let { currentPage, nextPage, prevPage, total } = null;
             state.status="Fallo en la carga.";
             state.data = {
-                currentPage,
-                nextPage,
-                prevPage,
-                total,
+                currentPage:null,
+                nextPage:null,
+                prevPage:null,
+                total:0,
                 videos: null 
             }
         },

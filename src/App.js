@@ -1,12 +1,12 @@
 import logo from './logo.svg';
 import './css/App.css';
-import { BrowserRouter, Routes, Route, Outlet, Link, useNavigate,  useParams, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Outlet, Link, useNavigate,  useParams, useLocation, Navigate } from 'react-router-dom';
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import  store, { persistor }  from './store';
 import SignIn from './usuarios/SignIn';
 import Reloj from './Reloj'
 import {logOut} from './store/usuario.js';  //redux reducer para hacer logout, definida en usuario.js
-import Videos from './videos/Videos';
+import Videos, { ComunVideos } from './videos/Videos';
 //import Videos2 from './videos/Videos2';
 import VideosForm from './videos/VideosForm';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -23,6 +23,8 @@ import { ThemeProvider } from 'styled-components';
 import tema, { EstilosGlobales } from './theme';
 import LayoutApp from './theme/LayoutApp';
 import UserFormLayout from './usuarios/UserFormLayout';
+import SignUp from './usuarios/Signup';
+import AppRoutes from './AppRoutes';
 
 
 
@@ -51,30 +53,7 @@ let ComunUsuarios = () => {
   )
 
 }
-//Componente comun a todas las carpetas de /videos
-let ComunVideos = () => {
-  let dispatcher = useDispatch();
-  let Navegador = useNavigate();
-  let iraHome = () => { Navegador('/') }
-  let borrarVideos = ()=>{  store.dispatch ( {type:'videos/clearVideos'} ) }
-  let cargarVideos = ()=>{  store.dispatch( loadVideos( {par1: "video1"}) ) }
-  //let borra1Video = ()=>{  store.dispatch ( {type:'videos/borrar1Video', videoid: document.querySelector("#quevideo").value} ) }
-  let borra1Video = ()=>{  store.dispatch ( {type: borrar1Video, videoid: document.querySelector("#quevideo").value} ) }
-  return (
-    <>
-      <h2>Elemento cabecera maste2 4.3 tris comun de /videos</h2>
-      <Videos  />
 
-      <button onClick={iraHome}>Home</button>
-      <button onClick={borrarVideos}>Borrar Videos</button>
-      <button onClick={cargarVideos}>Cargar Videos</button>
-      <button onClick={borra1Video}>Borrar un Video</button>
-      <input id='quevideo'></input>
-      <Outlet />
-    </>
-  )
-
-}
 //Componente para /videos/nuevo
 let VideosNuevo = () => {
   return (
@@ -106,19 +85,10 @@ let Videosid = () => {
   )
 }
 
-//Componente para pagina error 404
-let Error404 = () => {
-  return (
-    <>
-      <h1>Pagina no existe</h1>
-      <Link to='/'>Home</Link>
-    </>
-  )
-}
 
 
 function App() {
-
+  //let usuario=useSelector(state=>state.sliceUsuario.user);
   return ( 
     <div className="App">
    
@@ -128,23 +98,8 @@ function App() {
           <ThemeProvider theme={tema}>
             <EstilosGlobales />
             <LayoutApp>
-              <Routes>
-                  <Route path='/' element={<Home />}></Route>
-                  <Route path='/usuarios' element={<ComunUsuarios />} >
-                    <Route path='' element={<NoImplementado />} />
-                    <Route path='registro' element={<UserFormLayout />} />
-                    <Route path='login' element={<SignIn />} />
-                    <Route path='miperfil' element={<Perfil />} />
-                    <Route path=':id/videos' element={<NoImplementado />} />
-                  </Route>
-                  <Route path='/videos'  >
-                    <Route path='' element={<ComunVideos />} />
-                    <Route path='nuevo' element={<VideosNuevo />} />
-                    <Route path=':id' element={<VideoShow  />}></Route>
-                  </Route>
-                  <Route path='*' element={<Error404 />} />
-              </Routes>
-          </LayoutApp>
+              <AppRoutes />
+            </LayoutApp>
  
           </ThemeProvider>
         </PersistGate>

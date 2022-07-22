@@ -70,7 +70,7 @@ let Home = () => {
           <h2>Aplicacion Tiktok</h2>
           <p><Link to='/videos'>Link a /videos</Link></p>
           <p><Link to='/videos/nuevo'>Link a /videos/nuevo</Link></p>
-          <p><Link to='/usuarios'>Link a /usuarios</Link></p>
+          <p><Link to='/usuarios/registro'>Link a Registro</Link></p>
           <p><Link to='/usuarios/login'>Link a /usuarios/login</Link></p>
           <p><Link to='/usuarios/miperfil'>Mi Perfil</Link></p>
           <Boton2 id='boton' color='#f9f929' onClick={ ()=>navegar('/usuarios/miperfil')}>Mi Perfil</Boton2>

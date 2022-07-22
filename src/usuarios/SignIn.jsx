@@ -73,7 +73,7 @@ let SignIn = ( props) =>{
         <UserFormLayout>
             <form onSubmit={  botonLogin }>
                 <AppInput type='email' name='email'   label='Tu email' />
-                <AppInput type='password' name='password' label='Contraseña'  ></AppInput>
+                <AppInput type='password' name='password' label='Contraseña' autocomplete="current-password"  ></AppInput>
                 <AppInput type='submit' value='Login (submit)' />
 
                 { usuario 

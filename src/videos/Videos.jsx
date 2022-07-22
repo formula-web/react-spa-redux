@@ -3,7 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadVideos, ponerLike } from "../store/videos";
+import { borrar1Video, loadVideos, ponerLike } from "../store/videos";
 import Videoplayer from "./Videoplayer";
 import config from '../config/config';
 import { useRef } from "react";
@@ -11,6 +11,30 @@ import store from "../store";
 import { likeVideo } from "../store/likes";
 import { SmallContainer} from "../theme/LayoutApp";
 import Video from "./video";
+import { useNavigate } from "react-router-dom";
+
+//Componente Cabecera comun a todas las subpaginas de /videos
+export let ComunVideos = () => {
+    let dispatcher = useDispatch();
+    let Navegador = useNavigate();
+    let iraHome = () => { Navegador('/') }
+    let borrarVideos = ()=>{  store.dispatch ( {type:'videos/clearVideos'} ) }
+    let cargarVideos = ()=>{  store.dispatch( loadVideos( {par1: "video1"}) ) }
+    //let borra1Video = ()=>{  store.dispatch ( {type:'videos/borrar1Video', videoid: document.querySelector("#quevideo").value} ) }
+    let borra1Video = ()=>{  store.dispatch ( {type: borrar1Video, videoid: document.querySelector("#quevideo").value} ) }
+    return (
+      <>
+        <h2>Elemento cabecera comun de /videos</h2>
+        <button onClick={iraHome}>Home</button>
+        <button onClick={borrarVideos}>Borrar Videos</button>
+        <button onClick={cargarVideos}>Cargar Videos</button>
+        <button onClick={borra1Video}>Borrar un Video</button>
+        <input id='quevideo'></input>
+        
+      </>
+    )
+  
+  }
 
 
 

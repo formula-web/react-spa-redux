@@ -14,7 +14,7 @@ let Fieldset = styled.fieldset `
 let AppInput = (props) =>{
     return (
         <Fieldset>
-            <label htmlfor="">{props.label}</label>
+            <label htmlFor="">{props.label}</label>
             <Input {...props}></Input>
         </Fieldset>
     )

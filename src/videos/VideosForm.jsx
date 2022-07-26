@@ -1,7 +1,11 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import "../css/VideosForm.css";
+import AppButton from "../elementos/AppButton";
+import AppInput from "../elementos/AppInputs";
 import { crearVideo } from "../store/videos";
+import { ContainerCentrado } from "../theme";
+import { SmallContainer } from "../theme/LayoutApp";
 
 
 let VideosForm = (props)=>{
@@ -16,13 +20,16 @@ let VideosForm = (props)=>{
         dispatcher( crearVideo(formdata));
     }
     return ( 
-        <div>
+        <ContainerCentrado>
+            <SmallContainer>
             <form id='nuevovideo' onSubmit={ onSubmit }>
-                <input type='file' name='video' />
-                <input type='text' name='titulo' placeholder="titulo" />
-                <input type="submit" value="Enviar" />
+                <AppButton type='submit'>SUBIR VIDEO</AppButton>
+                <AppInput type='file' name='video' />
+                <AppInput type='text' name='titulo' placeholder="titulo" />
+
             </form>
-        </div>
+            </SmallContainer>
+        </ContainerCentrado>
     )
 }
 export default VideosForm;

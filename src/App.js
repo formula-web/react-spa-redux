@@ -98,7 +98,9 @@ function App() {
           <ThemeProvider theme={tema}>
             <EstilosGlobales />
             <LayoutApp>
+
               <AppRoutes />
+
             </LayoutApp>
  
           </ThemeProvider>

@@ -40,7 +40,7 @@ export let ComunVideos = () => {
 
 
 // Componente Videos 
-let Videos=( {videos} )=>{
+let Videos=(  )=>{
     console.log("<<<<<<RENDERIZANDO VIDEOS.JSX  inicio >>>>>>");
     let primeravez = useRef(false);
 

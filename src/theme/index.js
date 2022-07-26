@@ -8,7 +8,7 @@ export let EstilosGlobales = createGlobalStyle`
 `;
 
 
-const nombrecualquiera={    //da igual como se llame al final queda objetoimportado.theme.colores 
+const propiedadescss={    //da igual como se llame al final queda objetoimportado.theme.colores 
     colores: {
         blanco:'#ffffff',
         oscuro:'#27212e',
@@ -20,7 +20,8 @@ const nombrecualquiera={    //da igual como se llame al final queda objetoimport
     dims: {
         padding: {
             largepadding: '10vw',
-            medio: '0.5vw'
+            medio: '0.5vw',
+            small: '1em'
         },
         paddingamplio: '10vw',
         width:{
@@ -49,7 +50,7 @@ const nombrecualquiera={    //da igual como se llame al final queda objetoimport
       
     }
 }
-export default nombrecualquiera;
+export default propiedadescss;
 
 export let SvgButton = styled(ReactSVG)`
     & svg {  //propiedades css del SVG usado para el SvgButton
@@ -100,3 +101,4 @@ export let ContainerCentrado = styled.div `
     height: 100%;
     width:  100%;
 `;
+

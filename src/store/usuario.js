@@ -1,10 +1,10 @@
 //usuario.js 
-// Estado de usuario gestionado con Redux. Definir y Exportar Slice y Reducers:
-//  Slice 'usuario' 
+// Estado de usuario Redux. Definir y Exportar state de usuarios (Slice) y sus Reducers:
+//  Slice name:  'usuario' 
 //  Reducers / acciones de 'usuario':  signIn, logOut, signUp
 //  Exports: 
 //           Slice 'usuario':     userSlice.reducer      
-//           Reducers:            signIn,  logOut
+//           Reducers en userlice.reducer:  logOut,  signUp (asincrono), signIn (asincrono)
 
 import {   createAsyncThunk, createSlice } from '@reduxjs/toolkit'; 
 import config from '../config/config.js';

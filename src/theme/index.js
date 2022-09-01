@@ -7,7 +7,8 @@ export let EstilosGlobales = createGlobalStyle`
     *{box-sizing: border-box}
 `;
 
-
+// Estas propiedades se importan en App: import tema from './theme' 
+// y se comparten en toda la aplicacion con el atributo "theme" al envolverla con  <ThemeProvider theme={tema}>
 const propiedadescss={    //da igual como se llame al final queda objetoimportado.theme.colores 
     colores: {
         blanco:'#ffffff',
@@ -15,13 +16,15 @@ const propiedadescss={    //da igual como se llame al final queda objetoimportad
         negro:'#373737',
         acento:'#e53251',
         gris: '#f2f2f2',
-        azul: '#67e7e2'
+        azul: '#67e7e2',
+        plata: '#716385'
     },
     dims: {
         padding: {
             largepadding: '10vw',
             medio: '0.5vw',
-            small: '1em'
+            small: '1em',
+            tiny: '0.2em'
         },
         paddingamplio: '10vw',
         width:{
@@ -83,6 +86,13 @@ export let ClearButton=styled.button`
     display: block;
 `
 ;
+
+export let BotonAccion=styled.button`
+   outline: 0;
+   border:  3px solid gray;
+   background-color: ${propiedadescss.colores.acento};
+   color: white;
+`
 
 export let Titulo = styled.h1`
     font-size: 1.5em;

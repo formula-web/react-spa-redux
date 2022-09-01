@@ -10,7 +10,7 @@ import { useRef } from "react";
 import store from "../store";
 import { likeVideo } from "../store/likes";
 import { SmallContainer} from "../theme/LayoutApp";
-import Video from "./video";
+import Video from "./Video";
 import { useNavigate } from "react-router-dom";
 
 //Componente Cabecera comun a todas las subpaginas de /videos

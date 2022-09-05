@@ -42,8 +42,7 @@ let VideoShow=(props) =>{
                 videoActual && 
                 <>
                     <h2>{videoActual.title}</h2>
-                    <Videoplayer  video={videoActual} />
-                    <Video  video={videoActual} />
+                     <Video  video={videoActual} />
                 </>
             }
         </SmallContainer>

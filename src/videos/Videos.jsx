@@ -12,6 +12,7 @@ import { likeVideo } from "../store/likes";
 import { SmallContainer} from "../theme/LayoutApp";
 import Video from "./Video";
 import { useNavigate } from "react-router-dom";
+import VideosList from "./VideosList";
 
 //Componente Cabecera comun a todas las subpaginas de /videos
 export let ComunVideos = () => {
@@ -42,7 +43,7 @@ export let ComunVideos = () => {
 // Componente Videos 
 let Videos=(  )=>{
     console.log("<<<<<<RENDERIZANDO VIDEOS.JSX  inicio >>>>>>");
-    let primeravez = useRef(false);
+    let primeravez = useRef(true);
 
     //-- recoger y suscribirse a los cambios en state.sliceVideos:
     let stateVideos = useSelector(state=>state.sliceVideos); //recoge estado videos y se subscribe. Si cambia, se renderiza Videos
@@ -58,11 +59,11 @@ let Videos=(  )=>{
     useEffect( 
         ()=>{ 
             console.log("videos.jsx - carga inicial - llama a loadvideos()")
-            if ( true ) {
+            if ( false ) {
                 //console.log("<Videos> useEffect al Montarse el componente. ¿Se ejecuta dos veces?");
                 dispatcher( loadVideos() );   
             }
-            primeravez.current=true;
+            primeravez.current=false;
         }
         ,[]); //,[]  Indica que se ejecuta al renderizar por primera vez. Equivale a comtponentDidMount()
     
@@ -72,15 +73,30 @@ let Videos=(  )=>{
         dispatcher( {type: 'videos/ponerLike', videoId:videoId, like:like} );
     }
 
+    //Funcion loadNextPage:  para scroll infinito de react-virtualized, funcion de carga de filas
+    // Carga en el state tantas filas como devuelve el servicio videos_api (4 filas ?)
+    let loadNextPage = async()=>{
+      await dispatcher  ( loadVideos());
+    }
 
     return (
         <>
           <h2> Listado de Videos</h2>
             <div>
                 <SmallContainer>
-                { stateVideos.data.videos.map(video=>(
-                   <Video video={video} key={video.id} />
-                )) }
+                { 
+                  /* Listado con Scroll Infinito:  VideosList  */
+                  
+                  <VideosList videosState={stateVideos} loadNextPage={loadNextPage}>
+                  </VideosList>
+                  
+                /* Version antigua sin scroll infinito */
+                /*
+                   stateVideos.data.videos.map(video=>(
+                     <Video video={video} key={video.id} />
+                )) 
+                */
+                }
                 </SmallContainer>
             </div>
           <h2>.........................................................</h2>
@@ -88,5 +104,7 @@ let Videos=(  )=>{
         </>
     )
 }
+
+
 
 export default Videos;

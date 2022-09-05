@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { loadVideosUser } from "../store/videos";
 import { SmallContainer } from "../theme/LayoutApp";
 import Videoplayer from "../videos/Videoplayer";
+import Videos from "../videos/Videos";
 import LogoutBoton from "./LogoutBoton"
 
 // Contenedor principal PerfilHeader
@@ -103,6 +104,8 @@ let Perfil = ()=>{
             </Contador>
             
             <div className="videoscont">{
+                <Videos />
+                /*
                 videos.map( (video,index)=>
                     (
                     <div key={index}>
@@ -111,6 +114,7 @@ let Perfil = ()=>{
                     </div>
                     )
                 )
+                */
             }</div>
         </PerfilHeader>
         </SmallContainer>

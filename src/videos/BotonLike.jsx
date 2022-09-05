@@ -19,7 +19,7 @@ export let BotonUnLike = ( {video, darLike} )=> {
 
     return (
         <ClearButton onClick={()=>darLike({videoId:video.id, like:false})}>
-            <button>Unlike</button>
+            Unlike
         </ClearButton> 
     )
 }

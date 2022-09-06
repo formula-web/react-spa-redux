@@ -14,7 +14,7 @@ import BotonShare from "./BotonShare";
 //VideoContainer
 let VideoContainer = styled.div `
     position: relative;
-    padding-bottom: 177%;
+    //padding-bottom: 177%;
     margin-bottom: ${ (tema)=>tema.theme.dims.margin.normal   };
     background-color: ${ (tema)=>tema.theme.colores.black     };
     & iframe {
@@ -24,21 +24,22 @@ let VideoContainer = styled.div `
         position: absolute;
         z-index: 2;
         display: grid;
-        grid-template-rows: minmax(0,1fr) 100px;
-        grid-template-columns: minmax(0,1fr) auto;
-        grid-template-areas: 'main sidebar'
-                             ' info sidebar';
+        grid-template-rows: minmax(0,1fr) auto;
+        //grid-template-columns: minmax(0,1fr) auto;
+        grid-template-columns: repeat(2, minmax(auto,1fr));
+        grid-template-areas: 'info sidebar'
+                             'main sidebar';
         align-items: flex-start;
         transition: opacity 0.2s ease-in;
         width: 100%;
-        height: 100%;
+        height: auto;
         top: 0px;
         left: 0px;
         & article, & aside, &.user-info{ 
             padding: ${(tema)=>tema.theme.dims.padding.largepadding };
         };
         &  article.main{ grid-area: main;}
-        &  aside.sidebar { grid-area: sidebar} 
+        &  aside.sidebar { grid-area: info} 
         & .user-info{grid-area: info; align-self: middle; }
     }
 `; //fin VideoContainer
@@ -53,6 +54,8 @@ let Video = ({video})=>{
 
     return (
     <VideoContainer key={`video${video.id}`} id={`video${video.id}`}>
+    <>
+        <p>-inicio-{video.id}-{video.title}--</p>
         <div className="info">
             <aside className='sidebar'>
                 <BotonLike video={video} like={true} darLike={darLike} />
@@ -67,7 +70,8 @@ let Video = ({video})=>{
 
         </div>
         <Videoplayer video={video} />
- 
+        <p>-fin-----</p>
+    </>
     </VideoContainer>
     )
 }

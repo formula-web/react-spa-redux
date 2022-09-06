@@ -30,7 +30,7 @@ let VideosList = ( {videosState, loadNextPage} )=>{
    };  
    let loadMoreRows = ()=>{ loadNextPage() };  // funcion que carga mas elementos/filas ?
    let xx =  ({onRowsRendered, registerChild})=>(
-    <div style={{width:"200px", height:"80vh"}}>
+    <div style={{width:"100%", height:"80vh"}}>
         <AutoSizer>
         { ( {width, height})=>(
             <List
@@ -38,7 +38,7 @@ let VideosList = ( {videosState, loadNextPage} )=>{
             ref = {registerChild}
             height = {height}
             width={width}
-            rowHeight={100}
+            rowHeight={cache.current.rowHeight}
             rowCount = {4}
             rowRenderer = { ({index, key, style, parent})=>{
                 console.log("--rowRenderer--index:",index," video:",videosState.data.videos[index].title);
@@ -61,7 +61,7 @@ let VideosList = ( {videosState, loadNextPage} )=>{
         <div>
     
             <h2>Listado scroll infinito</h2>
-            <div style={{width:"200px", height:"80vh"}}>
+            <div style={{width:"100%", height:"80vh"}}>
                 <AutoSizer>
                 { ({width, height})=>(
                     <List          
@@ -69,7 +69,7 @@ let VideosList = ( {videosState, loadNextPage} )=>{
                         width={width}
                         rowHeight={cache.current.rowHeight}
                         deferredMeasurementCache={cache.current}
-                        rowCount = {10}
+                        rowCount = {videosState.data.videos.length}
                         /* Renderiza item video de posicion index del state de videos: */
                         rowRenderer = { ({index, key, style, parent})=>{ 
                             let video = videosState.data.videos[index];

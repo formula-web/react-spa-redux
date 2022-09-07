@@ -28,8 +28,10 @@ const propiedadescss={    //da igual como se llame al final queda objetoimportad
         },
         paddingamplio: '10vw',
         width:{
+            tiny:  '15em',
             small: '20em',
-            forms: '17.5em'
+            forms: '17.5em',
+            large: '60em'
         },
         margin:{
             small: '1em',

@@ -1,10 +1,15 @@
+// Define LayoutApp: componente que marca la estructura principal de la app. usa LayouContainer
+// que define div contenedor y estilos para areas nav y footer
+// Define SmallContainer:  contenedor para una foto y su info
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import Pie from "../elementos/Footer";
 import Cabecera from "../elementos/Header";
+import dispositivos from '../theme/breakpoints';
 
-//LayoutContainer no tiene contenido, solo estilo css con styled
+//LayoutContainer es un DIV vacio estilizado con styled. Usar como un wrapper 
+//define estilos para subelementos NAV y FOOTER
 let LayoutContainer = styled.div`
     display:grid;
     min-height: 100vh;   //container ajusta a alto pantalla
@@ -19,9 +24,18 @@ let LayoutContainer = styled.div`
     }
 `;
 
-//Contenedor pequeño para fotos
+//Contenedor estrecho para listado de fotos
 export let SmallContainer = styled.div`
-    width:${(tema)=>tema.theme.dims.width.small};
+    @media ${dispositivos.mobile}, ${dispositivos.tablet} {
+        width:${(tema)=>tema.theme.dims.width.tiny};
+    }
+
+    @media ${dispositivos.mediumLaptop} {
+        width:${(tema)=>tema.theme.dims.width.small};
+    }
+    @media ${dispositivos.maxLaptop} {
+        width:${(tema)=>tema.theme.dims.width.large};
+    }
     max-width: 100vw ;
     margin: 0 auto;
     background: pink;

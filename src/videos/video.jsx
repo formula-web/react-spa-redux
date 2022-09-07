@@ -25,8 +25,8 @@ let VideoContainer = styled.div `
         z-index: 2;
         display: grid;
         grid-template-rows: minmax(0,1fr) auto;
-        //grid-template-columns: minmax(0,1fr) auto;
-        grid-template-columns: repeat(2, minmax(auto,1fr));
+        grid-template-columns: minmax(0,1fr) auto;
+        //grid-template-columns: repeat(2, minmax(auto,1fr));
         grid-template-areas: 'info sidebar'
                              'main sidebar';
         align-items: flex-start;
@@ -39,7 +39,7 @@ let VideoContainer = styled.div `
             padding: ${(tema)=>tema.theme.dims.padding.largepadding };
         };
         &  article.main{ grid-area: main;}
-        &  aside.sidebar { grid-area: info} 
+        &  aside.sidebar { grid-area: sidebar} 
         & .user-info{grid-area: info; align-self: middle; }
     }
 `; //fin VideoContainer
